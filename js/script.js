@@ -299,3 +299,55 @@ function initForm() {
 
 // Start the form validation
 initForm();
+
+// ===== Impact Number Counters =====
+
+// Count an element's number up from 0 to its target over a short time
+function animateCount(element, target) {
+    const duration = 1500;
+    const startTime = performance.now();
+
+    function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        // Ease out so the count slows down as it nears the target
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        element.textContent = Math.round(target * eased);
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+
+// Start each .number at 0 and count up the first time it scrolls into view
+function initCounters() {
+    const counters = document.querySelectorAll(".number");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Stop here if this page has no counters, or the browser can't watch scrolling
+    // or the user prefers no motion (the final numbers stay as written in the HTML)
+    if (counters.length === 0 || reduceMotion || !("IntersectionObserver" in window)) {
+        return;
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                animateCount(entry.target, entry.target.dataset.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.6 });
+
+    counters.forEach(function (counter) {
+        counter.dataset.target = parseInt(counter.textContent, 10);
+        counter.textContent = "0";
+        observer.observe(counter);
+    });
+}
+
+// Start the counters
+initCounters();
