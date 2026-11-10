@@ -74,8 +74,10 @@ function setActiveButton(id) {
     buttons.forEach(function (button) {
         if (button.dataset.option === id) {
             button.classList.add("active");
+            button.setAttribute("aria-pressed", "true");
         } else {
             button.classList.remove("active");
+            button.setAttribute("aria-pressed", "false");
         }
     });
 }
@@ -85,12 +87,20 @@ const STORAGE_KEY = "helpInterest";
 
 // Save the chosen option id to localStorage
 function saveChoice(id) {
-    localStorage.setItem(STORAGE_KEY, id);
+    try {
+        localStorage.setItem(STORAGE_KEY, id);
+    } catch (e) {
+        // Storage unavailable (private mode or blocked); the selector still works
+    }
 }
 
 // Get the saved option id (returns null if nothing is saved)
 function loadChoice() {
-    return localStorage.getItem(STORAGE_KEY);
+    try {
+        return localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+        return null;
+    }
 }
 
 // Run everything that happens when an option is chosen
