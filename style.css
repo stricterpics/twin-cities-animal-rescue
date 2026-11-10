@@ -102,7 +102,9 @@ select:focus { outline: 2px solid #028e75; outline-offset: 2px; }
 .menu-toggle.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 
 @media (max-width: 767px){
-	.menu-toggle { display: flex; }
+	header { flex-flow: column; align-items: center; justify-content: center; }
+	header h1 { text-align: center; margin: 0; padding: 10px 15px 15px; }
+	.menu-toggle { display: flex; margin: 0 auto 15px; }
 	header nav.menu-ready { display: none; }
 	header nav.menu-ready.open { display: block; }
 	header nav.menu-ready ul { flex-flow: column; align-items: center; gap: 8px; }
