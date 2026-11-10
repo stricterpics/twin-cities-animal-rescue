@@ -309,3 +309,94 @@ function initForm() {
 
 // Start the form validation
 initForm();
+
+
+// ===== Mobile Menu (hamburger) =====
+function initMenu() {
+    const nav = document.querySelector("header nav");
+
+    if (!nav) {
+        return;
+    }
+
+    // Build the toggle button here so the menu stays visible if JavaScript is off
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "menu-toggle";
+    toggle.setAttribute("aria-label", "Menu");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", "main-nav");
+    toggle.innerHTML = "<span></span><span></span><span></span>";
+
+    nav.id = "main-nav";
+    nav.classList.add("menu-ready");
+    nav.insertAdjacentElement("beforebegin", toggle);
+
+    function setOpen(isOpen) {
+        nav.classList.toggle("open", isOpen);
+        toggle.classList.toggle("open", isOpen);
+        toggle.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    toggle.addEventListener("click", function () {
+        setOpen(!nav.classList.contains("open"));
+    });
+
+    // Close with the Escape key
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && nav.classList.contains("open")) {
+            setOpen(false);
+            toggle.focus();
+        }
+    });
+}
+
+initMenu();
+
+// ===== Impact Counters =====
+
+// Animate one number from 0 up to its final value
+function countUp(element, target) {
+    const duration = 1500;
+    const start = performance.now();
+
+    function step(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        element.textContent = Math.round(target * eased);
+
+        if (progress < 1) {
+            requestAnimationFrame(step);
+        }
+    }
+
+    requestAnimationFrame(step);
+}
+
+// Start each counter at 0 and count up when it scrolls into view
+function initCounters() {
+    const numbers = document.querySelectorAll("#our-impact .number");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Leave the real numbers in place if there is nothing to animate
+    if (numbers.length === 0 || reducedMotion || !("IntersectionObserver" in window)) {
+        return;
+    }
+
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                countUp(entry.target, Number(entry.target.dataset.count));
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.6 });
+
+    numbers.forEach(function (number) {
+        number.dataset.count = number.textContent.trim();
+        number.textContent = "0";
+        observer.observe(number);
+    });
+}
+
+initCounters();
