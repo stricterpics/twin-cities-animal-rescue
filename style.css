@@ -2,6 +2,8 @@
 /* CSS Document */
 
 body { margin: 0; font-family: 'Montserrat', sans-serif; }
+/* main sections: full-width patterned background with the content kept in a 960px column */
+main { padding: 40px max(40px, calc((100% - 960px) / 2)); background: #fff url("images/memphis-mini.png") repeat; }
 header { display: flex; flex-flow: row wrap; align-items: center; justify-content: space-between; }
 header img { height: 120px; width: auto; }
 section { padding: 15px; text-align: center; }
@@ -32,7 +34,7 @@ legend, h3 { font-size: 24px; color: #000; margin-top: 0px; }
 #spotlight { background: #68d7ae; text-align: center; margin-top: 20px; border-radius: 20px; padding: 20px; }
 
 #services img { border-radius: 100%; border: 10px solid #000; height: 200px; width: auto; }
-#services { display: flex; flex-flow: column; text-align: center; max-width: 960px; margin: 0 auto; padding: 40px; }
+#services { display: flex; flex-flow: column; text-align: center; }
 #services section:nth-of-type(3) { background: #f1f1f1; border-radius: 20px; }
 
 video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; }
@@ -45,9 +47,7 @@ figcaption { font-size: 14px; font-style: italic; }
 #core-values ul { display: flex; flex-flow: column; }
 #core-values li { padding: 0 15px 15px; text-align: center; }
 
-#about { max-width: 960px; margin: 0 auto; padding: 40px; }
 
-#contact { max-width: 960px; margin: 0 auto; padding: 40px; }
 #contact-info { display: flex; flex-flow: column; }
 form { background: #f1f1f1; padding: 20px; border-radius: 20px; width: 100%; }
 form label { font-size: 14px; font-weight: 600; }
@@ -71,7 +71,6 @@ nav a:focus-visible, footer a:focus-visible { outline-color: #68d7ae; }
 .selector-cta:hover { background-color: #028e75; color: #fff; }
 input[type="text"], input[type="email"], select, textarea { border-radius: 4px; font-size: 16px; padding: 10px; border: 1px solid #a1a1a1; margin-bottom: 10px; }
 
-#home { max-width: 960px; margin: 0 auto; padding: 40px; }
 
 #help-selector { width: 100%; min-width: 100%; background: #f1f1f1; margin-bottom: 40px; border-radius: 20px; padding: 30px; box-sizing: border-box; }
 
