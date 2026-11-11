@@ -92,7 +92,8 @@ select:focus { outline: 2px solid #028e75; outline-offset: 2px; }
 
 /* footer navigation: stacked on mobile, horizontal on larger screens */
 .footer-nav { padding: 0 0 10px; }
-.footer-nav ul { flex-flow: column; align-items: center; gap: 4px; }
+.footer-nav ul { flex-flow: column; align-items: center; gap: 12px; }
+.footer-nav a { display: inline-block; padding: 4px 6px; }
 .footer-nav li { margin: 0; }
 
 /* hamburger menu button (created by script.js) */
