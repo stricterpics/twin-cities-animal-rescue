@@ -61,6 +61,7 @@ button[type="submit"] { display: block; margin: 10px auto 0; background: #68d7ae
 .form-item .invalid { border: 2px solid #b00020; }
 #form-success { text-align: center; color: #028e75; font-weight: 800; margin-top: 15px; }
 #selector-result { background: #fff; padding: 30px; border-radius: 20px; margin: 20px auto; }
+#selector-result:empty { padding: 0; margin: 0; }
 .selector-buttons .selector-btn { font-size: 16px; color: #fff; background: #595959; padding: 10px; margin: 10px; border: 0px; border-radius: 8px; cursor: pointer; }
 .selector-buttons .selector-btn:hover { background: #028e75; }
 .selector-buttons .selector-btn.active { background: #000; }
